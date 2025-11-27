@@ -111,6 +111,11 @@ export default function Footer({ email, telefono, indirizzo, social }: FooterPro
                 </Link>
               </li>
               <li>
+                <Link href="/blog" className="font-sans text-[0.8rem] text-white/55 hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/contatti" className="font-sans text-[0.8rem] text-white/55 hover:text-white transition-colors">
                   Contatti
                 </Link>
