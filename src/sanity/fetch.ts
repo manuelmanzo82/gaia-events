@@ -86,6 +86,7 @@ export interface Impostazioni {
     soddisfazione?: string;
     location?: string;
   };
+  fotoChiSono?: string;
   heroHomepage?: {
     titolo?: string;
     sottotitolo?: string;

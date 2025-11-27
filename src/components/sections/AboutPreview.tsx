@@ -1,17 +1,32 @@
 import Link from "next/link";
+import Image from "next/image";
 
-export default function AboutPreview() {
+interface AboutPreviewProps {
+  fotoChiSono?: string;
+}
+
+export default function AboutPreview({ fotoChiSono }: AboutPreviewProps) {
   return (
     <section data-navbar-theme="light" className="py-20 px-6">
       <div className="max-w-[1050px] mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-12 md:gap-16 items-center">
         {/* Image with Gold Border */}
         <div className="relative">
-          <div className="aspect-[4/5] bg-beige rounded-[3px]">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-charcoal/30 font-sans text-sm tracking-wider">
-                FOTO GAIA
-              </span>
-            </div>
+          <div className="aspect-[4/5] bg-beige rounded-[3px] overflow-hidden relative">
+            {fotoChiSono ? (
+              <Image
+                src={fotoChiSono}
+                alt="Gaia - Wedding Planner"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 45vw"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-charcoal/30 font-sans text-sm tracking-wider">
+                  FOTO GAIA
+                </span>
+              </div>
+            )}
           </div>
           {/* Gold Border Frame */}
           <div className="absolute top-[15px] left-[15px] right-[-15px] bottom-[-15px] border-2 border-gold rounded-[3px] -z-10" />

@@ -89,6 +89,15 @@ const impostazioni = {
       ],
     },
     {
+      name: "fotoChiSono",
+      title: "Foto Chi Sono",
+      type: "image",
+      description: "Foto per la sezione Chi Sono in homepage",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: "heroHomepage",
       title: "Hero Homepage",
       type: "object",

@@ -126,6 +126,7 @@ export const impostazioniQuery = groq`
     indirizzo,
     social,
     statistiche,
+    "fotoChiSono": fotoChiSono.asset->url,
     heroHomepage {
       titolo,
       sottotitolo,
