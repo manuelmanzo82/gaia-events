@@ -81,11 +81,13 @@ export default function Navbar({ logo, siteName = "GAIA EVENTS" }: NavbarProps) 
                   alt={siteName}
                   width={300}
                   height={100}
-                  className="h-[60px] lg:h-[100px] w-auto object-contain transition-all duration-300"
+                  className="h-[60px] lg:h-[100px] w-auto object-contain transition-all duration-300 border-2 border-red-500"
                   style={{
                     filter: mobileMenuOpen ? "none" : (isDark ? "brightness(0) invert(1)" : "none"),
                   }}
                   priority
+                  onError={(e) => console.error("Logo image error:", e)}
+                  onLoad={() => console.log("Logo image loaded successfully")}
                 />
               ) : (
                 <span

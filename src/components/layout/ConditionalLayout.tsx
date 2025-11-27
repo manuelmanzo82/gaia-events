@@ -31,7 +31,12 @@ export default function ConditionalLayout({
 
   useEffect(() => {
     if (!isStudio) {
-      publicClient.fetch(impostazioniQuery).then(setSettings);
+      publicClient.fetch(impostazioniQuery).then((data) => {
+        console.log("Sanity settings fetched:", data);
+        setSettings(data);
+      }).catch((err) => {
+        console.error("Error fetching settings:", err);
+      });
     }
   }, [isStudio]);
 
