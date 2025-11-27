@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ivory: #FAF8F5;
+  --beige: #E8E2D9;
+  --sage: #8B9A7D;
+  --bordeaux: #722F37;
+  --gold: #C9A962;
+  --charcoal: #2D2D2D;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--charcoal);
+  background: var(--ivory);
+}
+
+/* Typography */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-semibold text-charcoal;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  p {
+    @apply font-sans text-charcoal/80 leading-relaxed;
+  }
+}
+
+/* Components */
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           bg-bordeaux text-ivory px-8 py-3
+           font-sans font-medium tracking-wide
+           transition-all duration-300
+           hover:bg-bordeaux/90 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center
+           border-2 border-bordeaux text-bordeaux px-8 py-3
+           font-sans font-medium tracking-wide
+           transition-all duration-300
+           hover:bg-bordeaux hover:text-ivory;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center
+           bg-gold text-charcoal px-8 py-3
+           font-sans font-medium tracking-wide
+           transition-all duration-300
+           hover:bg-gold/90 hover:shadow-lg;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .section-title {
+    @apply text-center mb-12 md:mb-16;
+  }
+
+  .section-subtitle {
+    @apply text-gold font-sans uppercase tracking-[0.2em] text-sm mb-4;
+  }
+
+  .card {
+    @apply bg-white rounded-sm shadow-sm overflow-hidden
+           transition-all duration-300 hover:shadow-md;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
