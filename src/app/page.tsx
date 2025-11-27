@@ -7,11 +7,18 @@ import {
   CTA,
   Stats,
 } from "@/components/sections";
+import { getImpostazioni } from "@/sanity/fetch";
 
-export default function Home() {
+export default async function Home() {
+  const impostazioni = await getImpostazioni();
+
   return (
     <>
-      <Hero />
+      <Hero
+        heroImage={impostazioni?.heroHomepage?.immagine}
+        title={impostazioni?.heroHomepage?.titolo}
+        subtitle={impostazioni?.heroHomepage?.sottotitolo}
+      />
       <AboutPreview />
       <Services />
       <PortfolioPreview />

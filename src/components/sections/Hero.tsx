@@ -1,15 +1,32 @@
 import Link from "next/link";
+import Image from "next/image";
 
-export default function Hero() {
+interface HeroProps {
+  heroImage?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export default function Hero({ heroImage, title, subtitle }: HeroProps) {
   return (
     <section data-navbar-theme="dark" className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-charcoal">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white/10 font-sans text-sm tracking-wider">
-            HERO BACKGROUND IMAGE
-          </span>
-        </div>
+        {heroImage ? (
+          <Image
+            src={heroImage}
+            alt="Hero Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-white/10 font-sans text-sm tracking-wider">
+              HERO BACKGROUND IMAGE
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Overlay */}
@@ -21,9 +38,9 @@ export default function Hero() {
           Wedding Planner & Event Manager
         </p>
         <h1 className="text-[clamp(2.2rem,6vw,4rem)] font-light text-white leading-[1.15] mb-5">
-          Creiamo Insieme
+          {title || "Creiamo Insieme"}
           <br />
-          <em className="italic">il Tuo Sogno</em>
+          <em className="italic">{subtitle || "il Tuo Sogno"}</em>
         </h1>
         <p className="font-sans text-[0.95rem] font-light text-white/90 max-w-[28rem] mx-auto mb-8">
           Esclusività e ricercatezza per il giorno più importante della tua vita
