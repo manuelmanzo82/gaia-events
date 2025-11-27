@@ -93,39 +93,44 @@ export interface Impostazioni {
   };
 }
 
+// Default fetch options for Next.js 14 caching
+const fetchOptions = {
+  next: { revalidate: 60 }, // Revalidate every 60 seconds
+};
+
 // Fetch functions
 export async function getEventi(): Promise<Evento[]> {
-  return client.fetch(eventiQuery);
+  return client.fetch(eventiQuery, {}, fetchOptions);
 }
 
 export async function getEventiInEvidenza(): Promise<Evento[]> {
-  return client.fetch(eventiInEvidenzaQuery);
+  return client.fetch(eventiInEvidenzaQuery, {}, fetchOptions);
 }
 
 export async function getEventoBySlug(slug: string): Promise<Evento | null> {
-  return client.fetch(eventoBySlugQuery, { slug });
+  return client.fetch(eventoBySlugQuery, { slug }, fetchOptions);
 }
 
 export async function getRecensioni(): Promise<Recensione[]> {
-  return client.fetch(recensioniQuery);
+  return client.fetch(recensioniQuery, {}, fetchOptions);
 }
 
 export async function getRecensioniInEvidenza(): Promise<Recensione[]> {
-  return client.fetch(recensioniInEvidenzaQuery);
+  return client.fetch(recensioniInEvidenzaQuery, {}, fetchOptions);
 }
 
 export async function getServizi(): Promise<Servizio[]> {
-  return client.fetch(serviziQuery);
+  return client.fetch(serviziQuery, {}, fetchOptions);
 }
 
 export async function getServizioBySlug(slug: string): Promise<Servizio | null> {
-  return client.fetch(servizioBySlugQuery, { slug });
+  return client.fetch(servizioBySlugQuery, { slug }, fetchOptions);
 }
 
 export async function getPaginaBySlug(slug: string): Promise<Pagina | null> {
-  return client.fetch(paginaBySlugQuery, { slug });
+  return client.fetch(paginaBySlugQuery, { slug }, fetchOptions);
 }
 
 export async function getImpostazioni(): Promise<Impostazioni | null> {
-  return client.fetch(impostazioniQuery);
+  return client.fetch(impostazioniQuery, {}, fetchOptions);
 }
