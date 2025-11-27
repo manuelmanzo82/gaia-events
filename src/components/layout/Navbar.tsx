@@ -83,13 +83,15 @@ export default function Navbar({ logo, siteName = "GAIA EVENTS" }: NavbarProps) 
                   height={100}
                   className="h-[60px] lg:h-[100px] w-auto object-contain transition-all duration-300"
                   style={{
-                    filter: isDark ? "brightness(0) invert(1)" : "none",
+                    filter: mobileMenuOpen ? "none" : (isDark ? "brightness(0) invert(1)" : "none"),
                   }}
                   priority
                 />
               ) : (
                 <span
-                  className={`font-serif text-[1.4rem] font-medium tracking-[0.12em] transition-colors duration-300 ${textColor}`}
+                  className={`font-serif text-[1.4rem] font-medium tracking-[0.12em] transition-colors duration-300 ${
+                    mobileMenuOpen ? "text-charcoal" : textColor
+                  }`}
                 >
                   {siteName}
                 </span>
@@ -111,7 +113,11 @@ export default function Navbar({ logo, siteName = "GAIA EVENTS" }: NavbarProps) 
 
             {/* Mobile Menu Button */}
             <button
-              className={`lg:hidden font-sans text-[0.65rem] tracking-[0.15em] uppercase px-4 py-2 border bg-transparent transition-all duration-300 ${textColor} ${isDark ? "border-ivory" : "border-charcoal"}`}
+              className={`lg:hidden font-sans text-[0.65rem] tracking-[0.15em] uppercase px-4 py-2 border bg-transparent transition-all duration-300 ${
+                mobileMenuOpen
+                  ? "text-charcoal border-charcoal"
+                  : `${textColor} ${isDark ? "border-ivory" : "border-charcoal"}`
+              }`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Menu"
             >

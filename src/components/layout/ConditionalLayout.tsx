@@ -10,6 +10,14 @@ import { impostazioniQuery } from "@/sanity/queries";
 interface Impostazioni {
   logo?: string;
   nomeSito?: string;
+  email?: string;
+  telefono?: string;
+  indirizzo?: string;
+  social?: {
+    instagram?: string;
+    facebook?: string;
+    pinterest?: string;
+  };
 }
 
 export default function ConditionalLayout({
@@ -35,7 +43,12 @@ export default function ConditionalLayout({
     <>
       <Navbar logo={settings?.logo} siteName={settings?.nomeSito} />
       <main>{children}</main>
-      <Footer />
+      <Footer
+        email={settings?.email}
+        telefono={settings?.telefono}
+        indirizzo={settings?.indirizzo}
+        social={settings?.social}
+      />
     </>
   );
 }
