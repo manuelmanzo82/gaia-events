@@ -1,11 +1,25 @@
 const evento = {
   name: "evento",
-  title: "Eventi (Portfolio)",
+  title: "Portfolio Eventi",
   type: "document",
   fields: [
     {
+      name: "macroCategoria",
+      title: "Macro Categoria",
+      type: "string",
+      options: {
+        list: [
+          { title: "Wedding", value: "wedding" },
+          { title: "Corporate", value: "corporate" },
+          { title: "Celebrations", value: "celebrations" },
+        ],
+        layout: "radio",
+      },
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
       name: "titolo",
-      title: "Titolo (Nome Coppia)",
+      title: "Titolo Evento",
       type: "string",
       validation: (Rule: any) => Rule.required(),
     },
@@ -32,34 +46,38 @@ const evento = {
     },
     {
       name: "categoria",
-      title: "Categoria",
+      title: "Sotto-categoria (opzionale)",
       type: "string",
-      options: {
-        list: [
-          { title: "Matrimonio Classico", value: "matrimonio-classico" },
-          { title: "Destination Wedding", value: "destination-wedding" },
-          { title: "Matrimonio Intimo", value: "matrimonio-intimo" },
-          { title: "Design & Styling", value: "design-styling" },
-        ],
-      },
-      validation: (Rule: any) => Rule.required(),
+      description: "Es: Destination Wedding, Matrimonio Classico, etc.",
     },
     {
-      name: "descrizione",
+      name: "descrizioneBreve",
       title: "Descrizione Breve",
       type: "text",
-      rows: 3,
+      rows: 2,
+      description: "Mostrata nelle liste (max 1-2 righe)",
     },
     {
-      name: "contenuto",
-      title: "Contenuto Completo",
+      name: "descrizioneCompleta",
+      title: "Descrizione Completa",
       type: "array",
       of: [{ type: "block" }],
+      description: "Testo completo per la pagina singola",
     },
     {
       name: "immagineCopertina",
       title: "Immagine Copertina",
       type: "image",
+      description: "Mostrata nelle liste",
+      options: {
+        hotspot: true,
+      },
+    },
+    {
+      name: "immagineHero",
+      title: "Immagine Hero",
+      type: "image",
+      description: "Immagine grande per la pagina singola (se diversa dalla copertina)",
       options: {
         hotspot: true,
       },
@@ -90,6 +108,25 @@ const evento = {
       ],
     },
     {
+      name: "videoUrl",
+      title: "Video URL",
+      type: "url",
+      description: "Link YouTube o Vimeo (opzionale)",
+    },
+    {
+      name: "testimonialTesto",
+      title: "Testimonial - Testo",
+      type: "text",
+      rows: 4,
+      description: "Recensione del cliente (opzionale)",
+    },
+    {
+      name: "testimonialAutore",
+      title: "Testimonial - Autore",
+      type: "string",
+      description: "Nome del cliente/coppia",
+    },
+    {
       name: "inEvidenza",
       title: "Mostra in Homepage",
       type: "boolean",
@@ -117,8 +154,20 @@ const evento = {
   preview: {
     select: {
       title: "titolo",
-      subtitle: "location",
+      subtitle: "macroCategoria",
       media: "immagineCopertina",
+    },
+    prepare({ title, subtitle, media }: any) {
+      const categoryLabels: Record<string, string> = {
+        wedding: "Wedding",
+        corporate: "Corporate",
+        celebrations: "Celebrations",
+      };
+      return {
+        title,
+        subtitle: categoryLabels[subtitle] || subtitle,
+        media,
+      };
     },
   },
 };

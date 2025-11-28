@@ -1,8 +1,10 @@
 import { client } from "./client";
 import {
   eventiQuery,
+  eventiByMacroCategoriaQuery,
   eventiInEvidenzaQuery,
   eventoBySlugQuery,
+  eventiCorrelatiQuery,
   recensioniQuery,
   recensioniInEvidenzaQuery,
   serviziQuery,
@@ -12,21 +14,28 @@ import {
 } from "./queries";
 
 // Types
+export type MacroCategoria = "wedding" | "corporate" | "celebrations";
+
 export interface Evento {
   _id: string;
+  macroCategoria: MacroCategoria;
   titolo: string;
   slug: { current: string };
   location: string;
   data?: string;
-  categoria: string;
-  descrizione?: string;
+  categoria?: string;
+  descrizioneBreve?: string;
+  descrizioneCompleta?: any[];
   immagineCopertina?: string;
-  contenuto?: any[];
+  immagineHero?: string;
   galleria?: {
     url: string;
     alt?: string;
     didascalia?: string;
   }[];
+  videoUrl?: string;
+  testimonialTesto?: string;
+  testimonialAutore?: string;
   inEvidenza?: boolean;
 }
 
@@ -68,6 +77,14 @@ export interface Pagina {
   }[];
 }
 
+export interface PortfolioCategoria {
+  titolo?: string;
+  sottotitolo?: string;
+  descrizione?: string;
+  immagineCopertina?: string;
+  immagineHero?: string;
+}
+
 export interface Impostazioni {
   nomeSito?: string;
   descrizione?: string;
@@ -81,16 +98,62 @@ export interface Impostazioni {
     pinterest?: string;
   };
   statistiche?: {
-    matrimoni?: string;
-    anni?: string;
-    soddisfazione?: string;
-    location?: string;
+    eventiRealizzati?: string;
+    anniEsperienza?: string;
+    locationPartner?: string;
+    fornitoriSelezionati?: string;
   };
   fotoChiSono?: string;
+  chiSono?: {
+    titolo?: string;
+    testoPrincipale?: string;
+    testoSecondario?: string;
+    foto?: string;
+    testoLink?: string;
+  };
   heroHomepage?: {
     titolo?: string;
     sottotitolo?: string;
     immagine?: string;
+  };
+  paginaChiSono?: {
+    heroImmagine?: string;
+    heroTitolo?: string;
+    heroSottotitolo?: string;
+    fotoRitratto?: string;
+    biografiaTitolo?: string;
+    biografiaTesto1?: string;
+    biografiaTesto2?: string;
+    biografiaTesto3?: string;
+    citazione?: string;
+    valori?: {
+      titolo?: string;
+      descrizione?: string;
+      icona?: string;
+    }[];
+    timeline?: {
+      anno?: string;
+      titolo?: string;
+      descrizione?: string;
+    }[];
+  };
+  paginaServizi?: {
+    heroImmagine?: string;
+    heroTitolo?: string;
+    heroSottotitolo?: string;
+    introTesto?: string;
+    citazione?: string;
+  };
+  paginaPortfolio?: {
+    heroImmagine?: string;
+    heroTitolo?: string;
+    heroSottotitolo?: string;
+    introTesto?: string;
+  };
+  portfolioCategorie?: {
+    wedding?: PortfolioCategoria;
+    corporate?: PortfolioCategoria;
+    celebrations?: PortfolioCategoria;
   };
 }
 
@@ -104,12 +167,20 @@ export async function getEventi(): Promise<Evento[]> {
   return client.fetch(eventiQuery, {}, fetchOptions);
 }
 
+export async function getEventiByMacroCategoria(macroCategoria: MacroCategoria): Promise<Evento[]> {
+  return client.fetch(eventiByMacroCategoriaQuery, { macroCategoria }, fetchOptions);
+}
+
 export async function getEventiInEvidenza(): Promise<Evento[]> {
   return client.fetch(eventiInEvidenzaQuery, {}, fetchOptions);
 }
 
 export async function getEventoBySlug(slug: string): Promise<Evento | null> {
   return client.fetch(eventoBySlugQuery, { slug }, fetchOptions);
+}
+
+export async function getEventiCorrelati(macroCategoria: MacroCategoria, currentSlug: string): Promise<Evento[]> {
+  return client.fetch(eventiCorrelatiQuery, { macroCategoria, currentSlug }, fetchOptions);
 }
 
 export async function getRecensioni(): Promise<Recensione[]> {

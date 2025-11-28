@@ -4,12 +4,28 @@ import { groq } from "next-sanity";
 export const eventiQuery = groq`
   *[_type == "evento"] | order(ordine asc, data desc) {
     _id,
+    macroCategoria,
     titolo,
     slug,
     location,
     data,
     categoria,
-    descrizione,
+    descrizioneBreve,
+    "immagineCopertina": immagineCopertina.asset->url,
+    inEvidenza
+  }
+`;
+
+export const eventiByMacroCategoriaQuery = groq`
+  *[_type == "evento" && macroCategoria == $macroCategoria] | order(ordine asc, data desc) {
+    _id,
+    macroCategoria,
+    titolo,
+    slug,
+    location,
+    data,
+    categoria,
+    descrizioneBreve,
     "immagineCopertina": immagineCopertina.asset->url,
     inEvidenza
   }
@@ -18,11 +34,12 @@ export const eventiQuery = groq`
 export const eventiInEvidenzaQuery = groq`
   *[_type == "evento" && inEvidenza == true] | order(ordine asc) [0...3] {
     _id,
+    macroCategoria,
     titolo,
     slug,
     location,
     categoria,
-    descrizione,
+    descrizioneBreve,
     "immagineCopertina": immagineCopertina.asset->url
   }
 `;
@@ -30,19 +47,36 @@ export const eventiInEvidenzaQuery = groq`
 export const eventoBySlugQuery = groq`
   *[_type == "evento" && slug.current == $slug][0] {
     _id,
+    macroCategoria,
     titolo,
     slug,
     location,
     data,
     categoria,
-    descrizione,
-    contenuto,
+    descrizioneBreve,
+    descrizioneCompleta,
     "immagineCopertina": immagineCopertina.asset->url,
+    "immagineHero": immagineHero.asset->url,
     galleria[] {
       "url": asset->url,
       alt,
       didascalia
-    }
+    },
+    videoUrl,
+    testimonialTesto,
+    testimonialAutore
+  }
+`;
+
+export const eventiCorrelatiQuery = groq`
+  *[_type == "evento" && macroCategoria == $macroCategoria && slug.current != $currentSlug] | order(ordine asc) [0...3] {
+    _id,
+    macroCategoria,
+    titolo,
+    slug,
+    location,
+    categoria,
+    "immagineCopertina": immagineCopertina.asset->url
   }
 `;
 
@@ -127,10 +161,72 @@ export const impostazioniQuery = groq`
     social,
     statistiche,
     "fotoChiSono": fotoChiSono.asset->url,
+    chiSono {
+      titolo,
+      testoPrincipale,
+      testoSecondario,
+      "foto": foto.asset->url,
+      testoLink
+    },
     heroHomepage {
       titolo,
       sottotitolo,
       "immagine": immagine.asset->url
+    },
+    paginaChiSono {
+      "heroImmagine": heroImmagine.asset->url,
+      heroTitolo,
+      heroSottotitolo,
+      "fotoRitratto": fotoRitratto.asset->url,
+      biografiaTitolo,
+      biografiaTesto1,
+      biografiaTesto2,
+      biografiaTesto3,
+      citazione,
+      valori[] {
+        titolo,
+        descrizione,
+        icona
+      },
+      timeline[] {
+        anno,
+        titolo,
+        descrizione
+      }
+    },
+    paginaServizi {
+      "heroImmagine": heroImmagine.asset->url,
+      heroTitolo,
+      heroSottotitolo,
+      introTesto,
+      citazione
+    },
+    paginaPortfolio {
+      "heroImmagine": heroImmagine.asset->url,
+      heroTitolo,
+      heroSottotitolo,
+      introTesto
+    },
+    portfolioCategorie {
+      wedding {
+        titolo,
+        descrizione,
+        "immagineCopertina": immagineCopertina.asset->url,
+        "immagineHero": immagineHero.asset->url
+      },
+      corporate {
+        titolo,
+        descrizione,
+        "immagineCopertina": immagineCopertina.asset->url,
+        "immagineHero": immagineHero.asset->url
+      },
+      celebrations {
+        titolo,
+        sottotitolo,
+        descrizione,
+        "immagineCopertina": immagineCopertina.asset->url,
+        "immagineHero": immagineHero.asset->url
+      }
     }
   }
 `;
