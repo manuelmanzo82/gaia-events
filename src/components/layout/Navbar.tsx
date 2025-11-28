@@ -70,7 +70,7 @@ export default function Navbar({ logo, siteName = "GAIA EVENTS" }: NavbarProps) 
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 pt-2 lg:pt-4">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 pt-6 lg:pt-10">
         <nav className="max-w-[1280px] mx-auto px-4 lg:px-6">
           <div className="flex items-center justify-between h-16 lg:h-24">
             {/* Logo */}
@@ -81,7 +81,7 @@ export default function Navbar({ logo, siteName = "GAIA EVENTS" }: NavbarProps) 
                   alt={siteName}
                   width={300}
                   height={100}
-                  className="h-[60px] lg:h-[100px] w-auto object-contain transition-all duration-300"
+                  className="h-[80px] lg:h-[130px] w-auto object-contain transition-all duration-300"
                   style={{
                     filter: mobileMenuOpen ? "none" : (isDark ? "brightness(0) invert(1)" : "none"),
                   }}
