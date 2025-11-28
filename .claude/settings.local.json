@@ -7,7 +7,17 @@
       "Bash(git commit:*)",
       "Bash(git config:*)",
       "Bash(git push)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(netstat:*)",
+      "Bash(taskkill //F //PID 344)",
+      "Bash(taskkill:*)",
+      "Bash(findstr:*)",
+      "Bash(node:*)",
+      "Bash(printf:*)",
+      "Bash(npx tsc:*)",
+      "Bash(git checkout:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

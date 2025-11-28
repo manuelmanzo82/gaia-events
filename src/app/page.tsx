@@ -22,12 +22,12 @@ export default async function Home() {
         title={impostazioni?.heroHomepage?.titolo}
         subtitle={impostazioni?.heroHomepage?.sottotitolo}
       />
-      <AboutPreview fotoChiSono={impostazioni?.fotoChiSono} />
+      <AboutPreview chiSono={impostazioni?.chiSono} />
       <Services />
       <PortfolioPreview />
       <Testimonials />
       <CTA />
-      <Stats />
+      <Stats statistiche={impostazioni?.statistiche} />
     </>
   );
 }

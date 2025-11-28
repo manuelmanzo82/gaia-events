@@ -2,19 +2,25 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface AboutPreviewProps {
-  fotoChiSono?: string;
+  chiSono?: {
+    titolo?: string;
+    testoPrincipale?: string;
+    testoSecondario?: string;
+    foto?: string;
+    testoLink?: string;
+  };
 }
 
-export default function AboutPreview({ fotoChiSono }: AboutPreviewProps) {
+export default function AboutPreview({ chiSono }: AboutPreviewProps) {
   return (
     <section data-navbar-theme="light" className="py-20 px-6">
       <div className="max-w-[1050px] mx-auto grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-12 md:gap-16 items-center">
         {/* Image with Gold Border */}
         <div className="relative">
           <div className="aspect-[4/5] bg-beige rounded-[3px] overflow-hidden relative">
-            {fotoChiSono ? (
+            {chiSono?.foto ? (
               <Image
-                src={fotoChiSono}
+                src={chiSono.foto}
                 alt="Gaia - Wedding Planner"
                 fill
                 className="object-cover"
@@ -38,25 +44,22 @@ export default function AboutPreview({ fotoChiSono }: AboutPreviewProps) {
             Chi Sono
           </p>
           <h2 className="text-[clamp(1.8rem,4vw,2.5rem)] font-normal text-charcoal mb-5">
-            Ciao, sono Gaia
+            {chiSono?.titolo || "Ciao, sono Gaia"}
           </h2>
           <p className="text-[1.05rem] font-light leading-[1.85] text-[#555] mb-6">
-            Da oltre 8 anni trasformo i sogni in eventi indimenticabili.
-            Ho avuto l&apos;onore di lavorare con brand prestigiosi come{" "}
-            <span className="text-bordeaux font-normal">Calzedonia</span>,{" "}
-            <span className="text-bordeaux font-normal">BNL</span> e{" "}
-            <span className="text-bordeaux font-normal">Zurich</span>,
-            portando la stessa cura e attenzione ai dettagli in ogni matrimonio.
+            {chiSono?.testoPrincipale ||
+              "Da oltre 8 anni trasformo i sogni in eventi indimenticabili. Ho avuto l'onore di lavorare con brand prestigiosi come Calzedonia, BNL e Zurich, portando la stessa cura e attenzione ai dettagli in ogni matrimonio."}
           </p>
-          <p className="text-[1.05rem] font-light leading-[1.85] text-[#555] mb-6">
-            Il mio obiettivo è rendere il vostro giorno speciale unico e senza stress,
-            curando ogni dettaglio con passione e professionalità.
-          </p>
+          {chiSono?.testoSecondario && (
+            <p className="text-[1.05rem] font-light leading-[1.85] text-[#555] mb-6">
+              {chiSono.testoSecondario}
+            </p>
+          )}
           <Link
             href="/chi-sono"
             className="inline-flex items-center gap-2.5 font-sans text-[0.75rem] tracking-[0.12em] uppercase text-gold hover:gap-4 transition-all"
           >
-            Scopri la mia storia
+            {chiSono?.testoLink || "Scopri la mia storia"}
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>

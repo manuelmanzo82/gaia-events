@@ -38,18 +38,18 @@ export default function Hero({ heroImage, title, subtitle }: HeroProps) {
           Wedding Planner & Event Manager
         </p>
         <h1 className="text-[clamp(2.2rem,6vw,4rem)] font-light text-white leading-[1.15] mb-5">
-          {title || "Creiamo Insieme"}
+          Creiamo Insieme
           <br />
-          <em className="italic">{subtitle || "il Tuo Sogno"}</em>
+          <em className="italic">il Tuo Sogno</em>
         </h1>
         <p className="font-sans text-[0.95rem] font-light text-white/90 max-w-[28rem] mx-auto mb-8">
-          Esclusività e ricercatezza per il giorno più importante della tua vita
+          Esclusività e ricercatezza
         </p>
         <Link
           href="/contatti"
           className="inline-block font-sans text-[0.75rem] tracking-[0.18em] uppercase px-9 py-4 bg-gold text-charcoal hover:bg-white transition-all"
         >
-          Raccontami il Tuo Evento
+          Parliamo del Tuo Evento
         </Link>
       </div>
 
