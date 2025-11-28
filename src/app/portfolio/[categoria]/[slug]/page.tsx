@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import { ArrowLeft, MapPin, Calendar, ArrowRight, Play } from "lucide-react";
-import { getEventoBySlug, getEventiCorrelati, Evento, MacroCategoria } from "@/sanity/fetch";
+import { ArrowLeft, MapPin, Calendar, ArrowRight } from "lucide-react";
+import { getEventoBySlug, getEventiCorrelati, Evento } from "@/sanity/fetch";
 import { PortableText } from "@portabletext/react";
 import { useParams, notFound } from "next/navigation";
 
@@ -373,7 +373,7 @@ export default function EventoPage() {
               Vuoi un Evento Così?
             </h2>
             <p className="text-[1rem] font-light leading-[1.8] text-ivory/80 mb-10">
-              Raccontami la tua storia e insieme creeremo l'evento dei tuoi sogni.
+              Raccontami la tua storia e insieme creeremo l&apos;evento dei tuoi sogni.
             </p>
             <Link
               href="/contatti"
